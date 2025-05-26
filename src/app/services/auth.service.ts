@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, delay, finalize, of } from 'rxjs';
 import { AuthUser, User } from '../interfaces/user.interface';
 
@@ -8,6 +9,7 @@ import { AuthUser, User } from '../interfaces/user.interface';
 })
 export class AuthService {
   _http = inject(HttpClient);
+  route = inject(Router);
 
   private $user = new BehaviorSubject<User | null>(null);
   $loggedUser = this.$user.asObservable();
@@ -20,6 +22,7 @@ export class AuthService {
 
   logout() {
     this.saveUser(null);
+    this.route.navigate(['/']);
     return of().pipe(delay(3000));
   }
 
@@ -39,7 +42,7 @@ export class AuthService {
     );
   }
 
-  getUser() {
+  getUser(): User | null {
     let user = null;
     if (this.$user.value) {
       user = this.$user.value;
@@ -49,6 +52,7 @@ export class AuthService {
     }
 
     if (user) this.setUser(user);
+    return user;
   }
 
   login(user: Omit<AuthUser, 'email'>) {

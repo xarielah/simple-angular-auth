@@ -1,0 +1,19 @@
+<h1>Registration Form</h1>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="col-layout">
+        <label for="username">Username</label>
+        <input type="text" formControlName="username" id="username" />
+    </div>
+
+    <div class="col-layout">
+        <label for="email">Email</label>
+        <input type="email" formControlName="email" id="email" />
+    </div>
+
+    <div class="col-layout">
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" id="password" />
+    </div>
+
+    <button type="submit" [disabled]="authService.$isLoading | async">Register</button>
+</form>

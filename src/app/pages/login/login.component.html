@@ -1,0 +1,14 @@
+<h1>Login Form</h1>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="col-layout">
+        <label for="username">Username</label>
+        <input type="text" formControlName="username" id="username" />
+    </div>
+
+    <div class="col-layout">
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" id="password" />
+    </div>
+
+    <button type="submit" [disabled]="authService.$isLoading | async">Login</button>
+</form>

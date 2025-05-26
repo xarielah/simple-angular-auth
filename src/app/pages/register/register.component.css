@@ -1,0 +1,14 @@
+form {
+    display: grid;
+    gap: 1rem;
+    max-width: 500px;
+
+    button {
+        width: max-content;
+    }
+}
+
+.col-layout {
+    display: grid;
+    gap: .5rem;
+}
